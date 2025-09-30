@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
-using BioMetrixCore;
+using SAPO.Interfaces;
 
 namespace SAPO.utilities
 {
@@ -93,10 +93,10 @@ namespace SAPO.utilities
                         {
                             "Id",
                             "Name",
-                            "Date",
-                            "Hour",
-                            "Status",
-                            "WorkedHours"
+                            "HasFingerPrint",
+                            "IsActive",
+                            "CreatedAt",
+                            "UpdatedAt"
                         };
                         writer.WriteLine(string.Join(",", values));
                     }
@@ -104,12 +104,10 @@ namespace SAPO.utilities
                     {
                         var values = new List<string>
                         {
-                            emp.Id,
-                            emp.Name,
-                            emp.Date,
-                            emp.Hora,
-                            emp.Status,
-                            emp.WorkedHours
+                            emp.GetId(),
+                            emp.GetName(),
+                            emp.GetHasFingerPrint().ToString(),
+                            emp.GetIsActive().ToString(),
                         };
                         writer.WriteLine(string.Join(",", values));
                         encabezado = true;

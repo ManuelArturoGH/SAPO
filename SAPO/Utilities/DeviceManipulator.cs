@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using BioMetrixCore;
+using Microsoft.Extensions.Logging;
+using SAPO.Interfaces;
+using SAPO.Interfaces.DTOs;
 
 namespace SAPO.utilities
 {
     internal class DeviceManipulator
     {
 
-        public ICollection<UserInterface> GetAllUserInfo(ZkemClient objZkeeper, int machineNumber)
+        public ICollection<UserInterface> GetAllUserInfo(ZkemClient objZkeeper, int machineNumber, ILogger logger)
         {
             string sdwEnrollNumber = string.Empty, sName = string.Empty, sPassword = string.Empty, sTmpData = string.Empty;
             int iPrivilege = 0, iTmpLength = 0, iFlag = 0, idwFingerIndex;
             bool bEnabled = false;
 
             ICollection<UserInterface> lstFPTemplates = new List<UserInterface>();
-
             objZkeeper.ReadAllUserID(machineNumber);
             objZkeeper.ReadAllTemplate(machineNumber);
-
             while (objZkeeper.SSR_GetAllUserInfo(machineNumber, out sdwEnrollNumber, out sName, out sPassword, out iPrivilege, out bEnabled))
             {
                 for (idwFingerIndex = 0; idwFingerIndex < 10; idwFingerIndex++)
@@ -44,7 +44,7 @@ namespace SAPO.utilities
             return lstFPTemplates;
         }
 
-        public ICollection<MachineInterface> GetLogData(ZkemClient objZkeeper, int machineNumber)
+        public ICollection<MachineInterface> GetLogData(ZkemClient objZkeeper, int machineNumber, ILogger logger)
         {
             string dwEnrollNumber1 = "";
             int dwVerifyMode = 0;

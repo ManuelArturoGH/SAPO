@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SAPO.EnvironmentVar;
+
 
 namespace SAPO
 {
@@ -26,8 +26,15 @@ namespace SAPO
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<EnvironmentVars>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost3000",
+                    builder => builder.WithOrigins("http://localhost:3000")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod());
+            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +48,7 @@ namespace SAPO
             {
                 app.UseHsts();
             }
-            
+            app.UseCors("AllowLocalhost3000");
             app.UseMvc();
         }
     }

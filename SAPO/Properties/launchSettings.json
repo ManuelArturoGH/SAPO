@@ -20,8 +20,8 @@
     "SAPO": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
-      "applicationUrl": "http://localhost:3000",
+      "launchUrl": "api/devicemanipulator/ok",
+      "applicationUrl": "http://localhost:3001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BioMetrixCore
+namespace SAPO.Interfaces
 {
     public class MachineInterface
     {

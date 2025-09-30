@@ -1,4 +1,4 @@
-﻿namespace BioMetrixCore
+﻿namespace SAPO.Interfaces
 {
     internal class UserInterface
     {

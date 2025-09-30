@@ -9,11 +9,14 @@ namespace SAPO.utilities
     public class ZkemClient : IZKEM
     {
         Action<object, string> RaiseDeviceEvent;
-        private readonly ILogger<DeviceManipulatorController> _logger;
+         public ILogger _logger;
 
-        public ZkemClient(Action<object, string> RaiseDeviceEvent, ILogger<DeviceManipulatorController> logger)
-        { this.RaiseDeviceEvent = RaiseDeviceEvent; this._logger = logger; }
 
+        public ZkemClient(ILogger logger, Action<object, string> RaiseDeviceEvent)
+        {
+            _logger = logger;
+            this.RaiseDeviceEvent = RaiseDeviceEvent;
+        }
 
         CZKEM objCZKEM = new CZKEM();
 
@@ -1361,6 +1364,11 @@ namespace SAPO.utilities
 
         #endregion
 
+        public bool GetConnectStatus(ref int dwErrorCode)
+        {
+            int ret = 0;
+            return objCZKEM.GetConnectStatus(ref ret);
+        }
 
         public void CancelByUser()  
         {
@@ -1459,10 +1467,7 @@ namespace SAPO.utilities
             throw new NotImplementedException();
         }
 
-        public bool GetConnectStatus(ref int dwErrorCode)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public bool GetDayBellSchCount(int dwMachineNumber, out int DayBellCnt)
         {
@@ -1791,5 +1796,7 @@ namespace SAPO.utilities
         public int MaxP4PConnect { get; }
         public int BatchDataMode { get; set; }
         public int SecureMode { get; }
+        
+        
     }
 }

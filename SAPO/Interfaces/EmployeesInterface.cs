@@ -1,24 +1,40 @@
 ﻿using System;
 
-namespace BioMetrixCore
+namespace SAPO.Interfaces
 {
-    public class EmployeesInterface
+    public class EmployeesInterface 
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Date { get; set; }
-        public string Hora { get; set; }
-        public string Status { get; set; }
-        public string WorkedHours { get; set; }
-
-        public EmployeesInterface(string id, string name, string date, string hora, string status, string workedHours)
+        private readonly string Id;
+        private readonly string Name;
+        private readonly int FingerPrintId;
+        private readonly bool IsActive;
+        private readonly int privilege;
+        public EmployeesInterface(string id, string name, int hasFingerPrint, int privilege, bool isActive, DateTime createdAt)
         {
             Id = id;
             Name = name;
-            Date = date;
-            Hora = hora;
-            Status = status;
-            WorkedHours = workedHours;
+            FingerPrintId = hasFingerPrint;
+            this.privilege = privilege;
+            IsActive = isActive;
         }
+        
+        public string GetId()
+        {
+            return Id;
+        }
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public int GetHasFingerPrint()
+        {
+            return FingerPrintId;
+        }
+        public bool GetIsActive()
+        {
+            return IsActive;
+        }
+        
     }
 }
