@@ -12,6 +12,8 @@
         <PackageId>SAPO-DeviceManipulator-API</PackageId>
         <Title>SAPO</Title>
         <Authors>Manuel Arturo Guillen Hernandez</Authors>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
  
