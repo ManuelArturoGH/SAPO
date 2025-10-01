@@ -81,9 +81,24 @@ namespace SAPO.Services
 
                 foreach (var log in logs)
                 {
+                    _logger.LogDebug("accessmode: " + log.InOutMode);
+                    string inOutMode;
+                    switch (log.InOutMode)
+                    {
+                        case 0:
+                            inOutMode = "Entrada";
+                            break;
+                        case 1:
+                            inOutMode = "Salida";
+                            break;
+                        default:
+                            inOutMode = "Entrada Tardía";
+                            break;
+                    }
                     Attendance attendanceLog = new Attendance(log.MachineNumber, log.IndRegID,
-                        DateTime.Parse(log.DateTimeRecord), (log.VerifyMode == 0)? "Huella" : "Clave" , (log.InOutMode == 0)? "Entrada" : "Salida");
+                        DateTime.Parse(log.DateTimeRecord), (log.VerifyMode == 0)? "Clave" : "Huella" , inOutMode);
                     result.Add(attendanceLog);
+                    _logger.LogDebug("Log: " + log.IndRegID + " - " + log.DateTimeRecord);
                 }
                 zkemClient.Disconnect();
                 return result;

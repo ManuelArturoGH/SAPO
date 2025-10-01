@@ -89,7 +89,7 @@ namespace SAPO.Controllers
 
                 foreach (var log in logs)
                 {
-                    if (logList.Exists(l => l.UserID == log.UserID && l.AttendanceTime == log.AttendanceTime))
+                    if (logList.Exists(l => l.UserID == log.UserID && l.AttendanceTime == log.AttendanceTime && l.AccessMode == log.AccessMode))
                     {
                         _logger.LogDebug("Log already in list");
                     }

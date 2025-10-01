@@ -5,66 +5,28 @@ namespace SAPO.Models
 {
     public class Employees : EmployeesInterface
     {
-        public string Id;
-        public string Name;
-        public int FingerPrintId;
-        public bool IsActive;
-        public int privilege;
-        
-        public Employees(string id, string name, int hasFingerPrint, int privilege, bool isActive, DateTime createdAt) : base(id, name, hasFingerPrint, privilege, isActive, createdAt)
+        public string Id { get; set; } = "";
+        public string Name { get; set; } = "";
+        public int FingerPrintId { get; set; }
+        public bool IsActive { get; set; }
+        public int Privilege { get; set; }
+
+        public Employees() : base("", "", 0, 0, false, DateTime.UtcNow) { }
+
+        public Employees(string id, string name, int hasFingerPrint, int privilege, bool isActive, DateTime createdAt)
+            : base(id, name, hasFingerPrint, privilege, isActive, createdAt)
         {
-            this.Id = id;
-            this.Name = name;
-            this.FingerPrintId = hasFingerPrint;
-            this.privilege = privilege;
-            this.IsActive = isActive;
-        }
-        
-        public new string GetId()
-        {
-            return Id;
+            Id = id;
+            Name = name;
+            FingerPrintId = hasFingerPrint;
+            Privilege = privilege;
+            IsActive = isActive;
         }
 
-        public new string GetName()
-        {
-            return Name;
-        }
-        
-        public new int GetHasFingerPrint()
-        {
-            return FingerPrintId;
-        }
-        
-        public new bool GetIsActive()
-        {
-            return IsActive;
-        }
-        public void SetName(string name)
-        {
-            Name = name;
-        }
-        
-        public void SetHasFingerPrint(int hasFingerPrint)
-        {
-            FingerPrintId = hasFingerPrint;
-        }
-        
-        public void SetIsActive(bool isActive)
-        {
-            IsActive = isActive;
-        }   
-        
-        public void SetPrivilege(int privilege)
-        {
-            this.privilege = privilege;
-        }
-        
-        public int GetPrivilege()
-        {
-            return privilege;
-        }
-        
-        
-        
+        public new string GetId() => Id;
+        public new string GetName() => Name;
+        public new int GetHasFingerPrint() => FingerPrintId;
+        public new bool GetIsActive() => IsActive;
+        public int GetPrivilege() => Privilege;
     }
 }
